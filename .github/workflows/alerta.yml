@@ -1,0 +1,21 @@
+name: Notificacion CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Enviar notificacion a ntfy
+        run: |
+          curl -H "Title: Nuevo Push en Main" \
+               -H "Priority: high" \
+               -d "Se subio codigo nuevo al repositorio en la rama main." \
+               https://ntfy.sh/devops-itla
